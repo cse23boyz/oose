@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Foreign Trading System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Foreign Trading System</h1>
+
+<!-- Login Section -->
+<div id="login">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" style="display:none;">
+    <h2>Welcome Trader</h2>
+
+    <button onclick="showItems()">Sourcing Items</button>
+
+    <div id="items"></div>
+
+    <div id="orderSection" style="display:none;">
+        <h3>Place Order</h3>
+        <input type="number" id="quantity" placeholder="Quantity">
+        <button onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <div id="billSection" style="display:none;">
+        <h3>Bill</h3>
+        <p id="bill"></p>
+        <button onclick="pay()">Pay</button>
+    </div>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
