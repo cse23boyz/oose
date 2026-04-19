@@ -6,37 +6,54 @@
 </head>
 <body>
 
-<h1>Foreign Trading System</h1>
+<div class="container">
 
-<!-- Login Section -->
-<div id="login">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Username"><br>
-    <input type="password" id="password" placeholder="Password"><br>
-    <button onclick="login()">Login</button>
-</div>
+    <h1>🌍 Foreign Trading System</h1>
 
-<!-- Dashboard -->
-<div id="dashboard" style="display:none;">
-    <h2>Welcome Trader</h2>
-
-    <button onclick="showItems()">Sourcing Items</button>
-
-    <div id="items"></div>
-
-    <div id="orderSection" style="display:none;">
-        <h3>Place Order</h3>
-        <input type="number" id="quantity" placeholder="Quantity">
-        <button onclick="placeOrder()">Place Order</button>
+    <!-- LOGIN -->
+    <div id="login" class="card">
+        <h2>Trader Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
     </div>
 
-    <div id="billSection" style="display:none;">
-        <h3>Bill</h3>
-        <p id="bill"></p>
-        <button onclick="pay()">Pay</button>
-    </div>
+    <!-- DASHBOARD -->
+    <div id="dashboard" style="display:none;">
 
-    <button onclick="logout()">Logout</button>
+        <div class="card">
+            <h2>Dashboard</h2>
+            <button onclick="showItems()">View Commodities</button>
+        </div>
+
+        <!-- ITEMS -->
+        <div id="items" class="grid"></div>
+
+        <!-- ORDER -->
+        <div id="orderSection" class="card" style="display:none;">
+            <h3>Place Order</h3>
+            <p id="selectedItem"></p>
+            <input type="number" id="quantity" placeholder="Enter Quantity">
+            <button onclick="placeOrder()">Generate Bill</button>
+        </div>
+
+        <!-- BILL -->
+        <div id="billSection" class="card" style="display:none;">
+            <h3>Bill Details</h3>
+            <p id="bill"></p>
+            <button onclick="pay()">Pay Now</button>
+        </div>
+
+        <!-- REPORT -->
+        <div class="card">
+            <h3>📊 Reports</h3>
+            <button onclick="generateReport('month')">1 Month Report</button>
+            <button onclick="generateReport('year')">1 Year Report</button>
+        </div>
+
+        <button class="logout" onclick="logout()">Logout</button>
+
+    </div>
 </div>
 
 <script src="script.js"></script>
