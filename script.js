@@ -1,14 +1,20 @@
 let items = [
-    { name: "Gold", price: 100 },
-    { name: "Silver", price: 50 },
-    { name: "Crude Oil", price: 70 },
-    { name: "Wheat", price: 20 },
-    { name: "Rice", price: 25 },
-    { name: "Copper", price: 60 }
+    { name: "Gold", price: 100, category: "metal" },
+    { name: "Silver", price: 50, category: "metal" },
+    { name: "Copper", price: 60, category: "metal" },
+    { name: "Aluminium", price: 40, category: "metal" },
+
+    { name: "Wheat", price: 20, category: "agri" },
+    { name: "Rice", price: 25, category: "agri" },
+    { name: "Corn", price: 18, category: "agri" },
+    { name: "Soybean", price: 30, category: "agri" },
+
+    { name: "Crude Oil", price: 70, category: "energy" },
+    { name: "Natural Gas", price: 55, category: "energy" }
 ];
 
-let selectedItem = null;
 let orders = [];
+let selectedItem = null;
 
 function login() {
     let u = document.getElementById("username").value;
@@ -18,15 +24,32 @@ function login() {
         document.getElementById("login").style.display = "none";
         document.getElementById("dashboard").style.display = "block";
     } else {
-        alert("Enter valid login details");
+        alert("Enter valid details");
     }
 }
 
-// Show items
 function showItems() {
+    displayItems(items);
+}
+
+// FILTER
+function filterItems() {
+    let search = document.getElementById("search").value.toLowerCase();
+    let category = document.getElementById("category").value;
+
+    let filtered = items.filter(item => {
+        return (category === "all" || item.category === category) &&
+               item.name.toLowerCase().includes(search);
+    });
+
+    displayItems(filtered);
+}
+
+// DISPLAY
+function displayItems(list) {
     let html = "";
 
-    items.forEach((item, index) => {
+    list.forEach((item, index) => {
         html += `
         <div class="item-card">
             <h4>${item.name}</h4>
@@ -38,7 +61,7 @@ function showItems() {
     document.getElementById("items").innerHTML = html;
 }
 
-// Select item
+// SELECT
 function selectItem(index) {
     selectedItem = items[index];
     document.getElementById("orderSection").style.display = "block";
@@ -46,7 +69,7 @@ function selectItem(index) {
         "Selected: " + selectedItem.name;
 }
 
-// Place order
+// ORDER
 function placeOrder() {
     let qty = document.getElementById("quantity").value;
 
@@ -68,48 +91,47 @@ Quantity: ${order.quantity}
 Total: ₹${order.total}`;
 
         document.getElementById("billSection").style.display = "block";
+
+        updateSummary();
     } else {
-        alert("Enter quantity and select item");
+        alert("Select item & enter quantity");
     }
 }
 
-// Payment
+// SUMMARY
+function updateSummary() {
+    let html = "";
+
+    orders.forEach(o => {
+        html += `<p>${o.item} - ${o.quantity} pcs - ₹${o.total}</p>`;
+    });
+
+    document.getElementById("summary").innerHTML = html;
+}
+
+// PAYMENT
 function pay() {
     alert("✅ Payment Successful!");
 }
 
-// Logout
-function logout() {
-    location.reload();
-}
-
-//////////////////////////////////////////////////
-// REPORT FEATURE
-//////////////////////////////////////////////////
-
+// REPORT
 function generateReport(type) {
     let now = new Date();
-    let filtered = [];
 
-    orders.forEach(order => {
-        let diff = (now - new Date(order.date)) / (1000 * 60 * 60 * 24);
-
-        if(type === "month" && diff <= 30) filtered.push(order);
-        if(type === "year" && diff <= 365) filtered.push(order);
+    let filtered = orders.filter(o => {
+        let diff = (now - new Date(o.date)) / (1000 * 60 * 60 * 24);
+        return (type === "month" && diff <= 30) ||
+               (type === "year" && diff <= 365);
     });
 
     if(filtered.length === 0) {
-        alert("No records found");
+        alert("No data");
         return;
     }
 
-    downloadCSV(filtered, type);
-}
-
-function downloadCSV(data, type) {
     let csv = "Item,Quantity,Total,Date\n";
 
-    data.forEach(o => {
+    filtered.forEach(o => {
         csv += `${o.item},${o.quantity},${o.total},${o.date.toLocaleDateString()}\n`;
     });
 
@@ -119,4 +141,9 @@ function downloadCSV(data, type) {
     link.href = URL.createObjectURL(blob);
     link.download = type + "_report.csv";
     link.click();
+}
+
+// LOGOUT
+function logout() {
+    location.reload();
 }
