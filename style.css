@@ -1,66 +1,90 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
     margin: 0;
-    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: white;
 }
 
+/* NAVBAR */
+.navbar {
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* CONTAINER */
 .container {
     text-align: center;
     padding: 20px;
 }
 
-h1 {
-    color: white;
-}
-
-.card {
-    background: white;
+/* GLASS EFFECT */
+.glass {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
     padding: 20px;
     margin: 15px auto;
     width: 320px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
 }
 
-input {
+/* INPUTS */
+input, select {
     width: 90%;
     padding: 10px;
     margin: 8px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: none;
 }
 
+/* BUTTON */
 button {
     padding: 10px 15px;
     margin: 8px;
     border: none;
     border-radius: 6px;
-    background: #2a5298;
-    color: white;
+    background: #00c6ff;
+    color: black;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
 }
 
 button:hover {
-    background: #1e3c72;
+    background: #0072ff;
+    color: white;
 }
 
+/* LOGOUT */
 .logout {
-    background: #e74c3c;
+    background: #ff4b2b;
 }
 
+/* GRID */
 .grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
+/* ITEM CARD */
 .item-card {
-    background: white;
+    background: rgba(255,255,255,0.15);
     padding: 15px;
     margin: 10px;
-    width: 150px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    width: 160px;
+    border-radius: 12px;
+    transition: transform 0.3s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+}
+
+/* SUMMARY */
+#summary {
+    text-align: left;
 }
