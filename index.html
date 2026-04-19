@@ -6,12 +6,15 @@
 </head>
 <body>
 
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>🌍 Foreign Trading</h2>
+</div>
+
 <div class="container">
 
-    <h1>🌍 Foreign Trading System</h1>
-
     <!-- LOGIN -->
-    <div id="login" class="card">
+    <div id="login" class="card glass">
         <h2>Trader Login</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
@@ -21,34 +24,47 @@
     <!-- DASHBOARD -->
     <div id="dashboard" style="display:none;">
 
-        <div class="card">
+        <div class="card glass">
             <h2>Dashboard</h2>
-            <button onclick="showItems()">View Commodities</button>
+            <input type="text" id="search" placeholder="Search item..." onkeyup="filterItems()">
+            <select id="category" onchange="filterItems()">
+                <option value="all">All</option>
+                <option value="metal">Metals</option>
+                <option value="agri">Agriculture</option>
+                <option value="energy">Energy</option>
+            </select>
+            <button onclick="showItems()">Show Items</button>
         </div>
 
         <!-- ITEMS -->
         <div id="items" class="grid"></div>
 
         <!-- ORDER -->
-        <div id="orderSection" class="card" style="display:none;">
-            <h3>Place Order</h3>
+        <div id="orderSection" class="card glass" style="display:none;">
+            <h3>🛒 Place Order</h3>
             <p id="selectedItem"></p>
             <input type="number" id="quantity" placeholder="Enter Quantity">
             <button onclick="placeOrder()">Generate Bill</button>
         </div>
 
         <!-- BILL -->
-        <div id="billSection" class="card" style="display:none;">
-            <h3>Bill Details</h3>
+        <div id="billSection" class="card glass" style="display:none;">
+            <h3>🧾 Bill</h3>
             <p id="bill"></p>
             <button onclick="pay()">Pay Now</button>
         </div>
 
+        <!-- ORDER SUMMARY -->
+        <div class="card glass">
+            <h3>📦 Order Summary</h3>
+            <div id="summary"></div>
+        </div>
+
         <!-- REPORT -->
-        <div class="card">
+        <div class="card glass">
             <h3>📊 Reports</h3>
-            <button onclick="generateReport('month')">1 Month Report</button>
-            <button onclick="generateReport('year')">1 Year Report</button>
+            <button onclick="generateReport('month')">1 Month</button>
+            <button onclick="generateReport('year')">1 Year</button>
         </div>
 
         <button class="logout" onclick="logout()">Logout</button>
